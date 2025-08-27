@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Mystic Tarot&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&amp;family=Cinzel:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-dark: #1f1d2e;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-light: #f3e9d2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-gold: #b2946c;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--card-back: #4b3d5c;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--border-glow: rgba(178, 148, 108, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cormorant Garamond', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image: radial-gradient(circle, var(--bg-dark) 0%, #0c0b1a 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 900px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(5px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(5px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cinzel', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(2rem, 5vw, 3.5rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 10px var(--border-glow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cinzel', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.5rem, 4vw, 2.5rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 0 0 8px var(--border-glow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1rem, 2vw, 1.2rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.draw-button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cinzel', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.2rem, 3vw, 1.5rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.8rem 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--bg-dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s, box-shadow 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.draw-button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-3px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.draw-button:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>perspective: 1000px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tarot-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: clamp(100px, 25vw, 180px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: clamp(180px, 45vw, 320px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform-style: preserve-3d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.6s ease-out;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--card-back);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tarot-card.flipped {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: rotateY(180deg);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tarot-card.flipped.reversed {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: rotateY(180deg) rotateZ(180deg);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-inner {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-front, .card-back {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backface-visibility: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backface-visibility: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-back {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, var(--card-back) 0%, #3e364a 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: rotateY(0deg);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: inset 0 0 10px var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-front {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.05);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: rotateY(180deg);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 15px var(--border-glow);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cinzel', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(0.9rem, 2.5vw, 1.2rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-position {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Cinzel', serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-image {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 80%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 60%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(178, 148, 108, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-image svg {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 90%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 90%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>fill: var(--text-light);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>stroke: var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reading-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(0, 0, 0, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px dashed var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reading-card-meaning {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px dashed rgba(178, 148, 108, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loading-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loading-spinner {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 4px solid var(--accent-gold);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 4px solid transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 1s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hidden {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Mystic Tarot Reading&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;A three-card spread to unveil your path. Focus on a question, and draw your cards when you are ready.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="button-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="draw-button" id="drawButton"&gt;Draw Three Cards&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="loading-container" id="loadingContainer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="loading-spinner"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;Consulting the cards...&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card-container" id="cardContainer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="reading-container hidden" id="readingContainer"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const deck = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Major Arcana (22 cards)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Fool", meaning: "Beginnings, innocence, spontaneity, a free spirit.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Magician", meaning: "Power, skill, concentration, action, resourcefulness.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The High Priestess", meaning: "Intuition, sacred knowledge, the subconscious mind.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Empress", meaning: "Femininity, beauty, nature, nurturing, abundance.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Emperor", meaning: "Authority, structure, control, a father figure.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Hierophant", meaning: "Tradition, conformity, morality, ethics, spiritual guidance.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Lovers", meaning: "Love, harmony, relationships, choices, union.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Chariot", meaning: "Willpower, control, determination, success, action.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Strength", meaning: "Strength, courage, compassion, patience, self-control.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Hermit", meaning: "Soul-searching, introspection, solitude, inner guidance.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Wheel of Fortune", meaning: "Cycles, destiny, good luck, a turning point.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Justice", meaning: "Justice, fairness, truth, cause and effect.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Hanged Man", meaning: "Suspension, surrender, new perspective, letting go.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Death", meaning: "Endings, change, transformation, transition.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Temperance", meaning: "Balance, moderation, patience, harmony.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Devil", meaning: "Bondage, shadow self, addiction, materialism.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Tower", meaning: "Sudden change, upheaval, chaos, revelation.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Star", meaning: "Hope, inspiration, serenity, renewal.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Moon", meaning: "Illusion, fear, anxiety, subconscious, intuition.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The Sun", meaning: "Joy, success, celebration, positivity, vitality.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Judgement", meaning: "Rebirth, inner calling, absolution, awakening.", type: "Major Arcana" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "The World", meaning: "Completion, integration, travel, accomplishment.", type: "Major Arcana" },</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Minor Arcana (52 cards - Four suits of 13)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Wands</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ace of Wands", meaning: "Inspiration, new ideas, growth, potential.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Two of Wands", meaning: "Future planning, discovery, boldness.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Three of Wands", meaning: "Expansion, foresight, overseas trade.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Four of Wands", meaning: "Celebration, harmony, home, community.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Five of Wands", meaning: "Conflict, competition, disagreement.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Six of Wands", meaning: "Victory, public recognition, progress.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Seven of Wands", meaning: "Challenge, defense, perseverance.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Eight of Wands", meaning: "Swift action, movement, air travel.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Nine of Wands", meaning: "Resilience, inner strength, persistence.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ten of Wands", meaning: "Burden, responsibility, hard work.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Page of Wands", meaning: "Enthusiasm, new ideas, creative opportunities.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Queen of Wands", meaning: "Courage, determination, warmth, a creative visionary.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "King of Wands", meaning: "Natural leader, vision, entrepreneur.", type: "Minor Arcana - Wands" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Cups</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ace of Cups", meaning: "New feelings, emotional beginnings, compassion.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Two of Cups", meaning: "United love, partnership, connection.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Three of Cups", meaning: "Friendship, community, celebration.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Four of Cups", meaning: "Apathy, discontent, re-evaluation.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Five of Cups", meaning: "Loss, grief, regret.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Six of Cups", meaning: "Nostalgia, childhood memories, innocence.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Seven of Cups", meaning: "Fantasy, illusion, choices.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Eight of Cups", meaning: "Disappointment, walking away, search for meaning.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Nine of Cups", meaning: "Wishes fulfilled, satisfaction, comfort.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ten of Cups", meaning: "Inner peace, joy, harmonious relationships.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Page of Cups", meaning: "Creative beginnings, emotional news, intuition.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Queen of Cups", meaning: "Compassion, emotional security, intuition.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "King of Cups", meaning: "Emotional balance, compassion, control.", type: "Minor Arcana - Cups" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Swords</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ace of Swords", meaning: "Clear thinking, new ideas, justice.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Two of Swords", meaning: "Stalemate, indecision, blocked emotions.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Three of Swords", meaning: "Heartbreak, sorrow, mental anguish.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Four of Swords", meaning: "Rest, contemplation, restoration.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Five of Swords", meaning: "Conflict, tension, loss, defeat.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Six of Swords", meaning: "Transition, change, moving on.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Seven of Swords", meaning: "Deception, betrayal, cunning, strategy.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Eight of Swords", meaning: "Restriction, self-imprisonment, anxiety.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Nine of Swords", meaning: "Anxiety, worry, nightmares, despair.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ten of Swords", meaning: "Painful endings, rock bottom, new beginnings.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Page of Swords", meaning: "Curiosity, new ideas, eagerness, gossip.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Queen of Swords", meaning: "Sharp wit, honest, objective, independent.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "King of Swords", meaning: "Intellectual power, authority, truth.", type: "Minor Arcana - Swords" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Pentacles</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ace of Pentacles", meaning: "New opportunities, prosperity, a fresh start.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Two of Pentacles", meaning: "Balance, adaptability, juggling resources.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Three of Pentacles", meaning: "Teamwork, collaboration, learning.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Four of Pentacles", meaning: "Control, stability, security, greed.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Five of Pentacles", meaning: "Financial struggle, poverty, hardship, loneliness.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Six of Pentacles", meaning: "Giving, receiving, sharing wealth, charity.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Seven of Pentacles", meaning: "Assessment, reward, effort, harvest.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Eight of Pentacles", meaning: "Skill, craftsmanship, hard work, mastery.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Nine of Pentacles", meaning: "Luxury, independence, security, solitude.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Ten of Pentacles", meaning: "Wealth, family, legacy, established home.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Page of Pentacles", meaning: "New opportunities, inspiration, manifesting.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "Queen of Pentacles", meaning: "Practicality, nurturing, security, abundance.", type: "Minor Arcana - Pentacles" },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: "King of Pentacles", meaning: "Wealth, stability, security, discipline.", type: "Minor Arcana - Pentacles" }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const positions = ["The Past", "The Present", "The Future"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const drawButton = document.getElementById('drawButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cardContainer = document.getElementById('cardContainer');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const readingContainer = document.getElementById('readingContainer');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const loadingContainer = document.getElementById('loadingContainer');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Simple SVG for the card backs</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cardBackSVG = `</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;rect x="5" y="5" width="90" height="90" rx="10" stroke="#b2946c" stroke-width="2" fill="none" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;circle cx="50" cy="50" r="25" fill="#f3e9d2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;path d="M50 25 L50 75 M25 50 L75 50" stroke="#b2946c" stroke-width="4" stroke-linecap="round" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Card image generation (Placeholder for a more detailed image)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function getCardImageSVG(cardName) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const words = cardName.split(' ');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const initials = words.map(w =&gt; w.charAt(0)).join('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;rect x="5" y="5" width="90" height="90" fill="#2d2b40" stroke="#b2946c" stroke-width="2" rx="10" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;text x="50" y="50" font-family="Cinzel, serif" font-size="20" font-weight="bold" fill="#f3e9d2" text-anchor="middle" dominant-baseline="middle"&gt;${initials}&lt;/text&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function getReadingFromAPI(cards) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cardData = cards.map(c =&gt; `Card: ${c.name} - Meaning: ${c.meaning}`).join('\n');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Based on the following three tarot cards and their meanings, provide a short, mystical, and insightful three-sentence reading that connects their meanings together. Do not just list the meanings again. The first card represents the past, the second the present, and the third the future.</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Cards:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${cardData}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const chatHistory = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory.push({ role: "user", parts: [{ text: prompt }] });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = { contents: chatHistory };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiKey = ""<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let response = null;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let result = null;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const maxRetries = 5;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const initialDelay = 1000;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let i = 0; i &lt; maxRetries; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>response = await fetch(apiUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>result = await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (response.status === 429) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Exponential backoff</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const delay = initialDelay * Math.pow(2, i);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>await new Promise(res =&gt; setTimeout(res, delay));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>throw new Error(`API call failed with status: ${response.status}`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>throw new Error("Maximum retries exceeded or non-recoverable error occurred.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (result.candidates &amp;&amp; result.candidates.length &gt; 0 &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content &amp;&amp; result.candidates[0].content.parts &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content.parts.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return result.candidates[0].content.parts[0].text;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return "The threads of fate are intertwined in a way that words cannot describe. Seek deeper within yourself for the answer.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Error fetching reading:", error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "The cosmic connection is weak, and the cards cannot be read at this moment. Please try again later.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function drawCards() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Disable button and show loading state</p>
+<p class="p1"><span class="Apple-converted-space">            </span>drawButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>readingContainer.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cardContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>readingContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingContainer.style.display = 'flex';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Randomly select 3 unique cards</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const shuffledDeck = deck.sort(() =&gt; 0.5 - Math.random());</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selectedCards = shuffledDeck.slice(0, 3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isReversed = Math.random() &lt; 0.3; // 30% chance for a reversed card</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Create and display the cards with a flip animation</p>
+<p class="p1"><span class="Apple-converted-space">            </span>selectedCards.forEach((card, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cardDiv = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardDiv.className = `tarot-card ${isReversed &amp;&amp; index === 1 ? 'reversed' : ''}`;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cardInner = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardInner.className = 'card-inner';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cardFront = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardFront.className = 'card-front';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardFront.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card-position"&gt;${positions[index]}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card-image"&gt;${getCardImageSVG(card.name)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card-name"&gt;${card.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cardBack = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardBack.className = 'card-back';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardBack.innerHTML = cardBackSVG;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardInner.appendChild(cardBack);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardInner.appendChild(cardFront);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardDiv.appendChild(cardInner);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cardContainer.appendChild(cardDiv);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Add flip animation after a small delay</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>cardDiv.classList.add('flipped');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 500 * index);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Get reading from API</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const readingText = await getReadingFromAPI(selectedCards);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Display reading</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingContainer.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>readingContainer.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>readingContainer.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;The Reading&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="reading-card-meaning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;${positions[0]}: ${selectedCards[0].name}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;${selectedCards[0].meaning}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="reading-card-meaning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;${positions[1]}: ${selectedCards[1].name}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;${selectedCards[1].meaning}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="reading-card-meaning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;${positions[2]}: ${selectedCards[2].name}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;${selectedCards[2].meaning}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;In Conjunction:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;${readingText}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>drawButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>drawButton.addEventListener('click', drawCards);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
