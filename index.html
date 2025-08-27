@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystic Tarot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1f1d2e;
+            --text-light: #f3e9d2;
+            --accent-gold: #b2946c;
+            --card-back: #4b3d5c;
+            --border-glow: rgba(178, 148, 108, 0.5);
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+            background-image: radial-gradient(circle, var(--bg-dark) 0%, #0c0b1a 100%);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-gold);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--border-glow);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--accent-gold);
+            margin-top: 2rem;
+            text-shadow: 0 0 8px var(--border-glow);
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.6;
+        }
+
+        .button-container {
+            margin-top: 2rem;
+        }
+
+        .draw-button {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: bold;
+            padding: 0.8rem 2rem;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .draw-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .draw-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            perspective: 1000px;
+        }
+
+        .tarot-card {
+            width: clamp(100px, 25vw, 180px);
+            height: clamp(180px, 45vw, 320px);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-gold);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-out;
+            cursor: pointer;
+            background: var(--card-back);
+        }
+
+        .tarot-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .tarot-card.flipped.reversed {
+            transform: rotateY(180deg) rotateZ(180deg);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, var(--card-back) 0%, #3e364a 100%);
+            transform: rotateY(0deg);
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px var(--accent-gold);
+        }
+
+        .card-front {
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotateY(180deg);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--border-glow);
+            color: var(--text-light);
+        }
+
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .card-position {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .card-image {
+            width: 80%;
+            height: 60%;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(178, 148, 108, 0.5);
+        }
+
+        .card-image svg {
+            width: 90%;
+            height: 90%;
+            fill: var(--text-light);
+            stroke: var(--accent-gold);
+        }
+
+        .reading-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px dashed var(--accent-gold);
+        }
+
+        .reading-card-meaning {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed rgba(178, 148, 108, 0.3);
+            padding-bottom: 1.5rem;
+        }
+
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .loading-spinner {
+            border: 4px solid var(--accent-gold);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mystic Tarot Reading</h1>
+        <p>A three-card spread to unveil your path. Focus on a question, and draw your cards when you are ready.</p>
+        <div class="button-container">
+            <button class="draw-button" id="drawButton">Draw Three Cards</button>
+        </div>
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-spinner"></div>
+            <div>Consulting the cards...</div>
+        </div>
+        <div class="card-container" id="cardContainer"></div>
+        <div class="reading-container hidden" id="readingContainer"></div>
+    </div>
+
+    <script>
+        const deck = [
+            // Major Arcana (22 cards)
+            { name: "The Fool", meaning: "Beginnings, innocence, spontaneity, a free spirit.", type: "Major Arcana" },
+            { name: "The Magician", meaning: "Power, skill, concentration, action, resourcefulness.", type: "Major Arcana" },
+            { name: "The High Priestess", meaning: "Intuition, sacred knowledge, the subconscious mind.", type: "Major Arcana" },
+            { name: "The Empress", meaning: "Femininity, beauty, nature, nurturing, abundance.", type: "Major Arcana" },
+            { name: "The Emperor", meaning: "Authority, structure, control, a father figure.", type: "Major Arcana" },
+            { name: "The Hierophant", meaning: "Tradition, conformity, morality, ethics, spiritual guidance.", type: "Major Arcana" },
+            { name: "The Lovers", meaning: "Love, harmony, relationships, choices, union.", type: "Major Arcana" },
+            { name: "The Chariot", meaning: "Willpower, control, determination, success, action.", type: "Major Arcana" },
+            { name: "Strength", meaning: "Strength, courage, compassion, patience, self-control.", type: "Major Arcana" },
+            { name: "The Hermit", meaning: "Soul-searching, introspection, solitude, inner guidance.", type: "Major Arcana" },
+            { name: "Wheel of Fortune", meaning: "Cycles, destiny, good luck, a turning point.", type: "Major Arcana" },
+            { name: "Justice", meaning: "Justice, fairness, truth, cause and effect.", type: "Major Arcana" },
+            { name: "The Hanged Man", meaning: "Suspension, surrender, new perspective, letting go.", type: "Major Arcana" },
+            { name: "Death", meaning: "Endings, change, transformation, transition.", type: "Major Arcana" },
+            { name: "Temperance", meaning: "Balance, moderation, patience, harmony.", type: "Major Arcana" },
+            { name: "The Devil", meaning: "Bondage, shadow self, addiction, materialism.", type: "Major Arcana" },
+            { name: "The Tower", meaning: "Sudden change, upheaval, chaos, revelation.", type: "Major Arcana" },
+            { name: "The Star", meaning: "Hope, inspiration, serenity, renewal.", type: "Major Arcana" },
+            { name: "The Moon", meaning: "Illusion, fear, anxiety, subconscious, intuition.", type: "Major Arcana" },
+            { name: "The Sun", meaning: "Joy, success, celebration, positivity, vitality.", type: "Major Arcana" },
+            { name: "Judgement", meaning: "Rebirth, inner calling, absolution, awakening.", type: "Major Arcana" },
+            { name: "The World", meaning: "Completion, integration, travel, accomplishment.", type: "Major Arcana" },
+
+            // Minor Arcana (52 cards - Four suits of 13)
+            // Wands
+            { name: "Ace of Wands", meaning: "Inspiration, new ideas, growth, potential.", type: "Minor Arcana - Wands" },
+            { name: "Two of Wands", meaning: "Future planning, discovery, boldness.", type: "Minor Arcana - Wands" },
+            { name: "Three of Wands", meaning: "Expansion, foresight, overseas trade.", type: "Minor Arcana - Wands" },
+            { name: "Four of Wands", meaning: "Celebration, harmony, home, community.", type: "Minor Arcana - Wands" },
+            { name: "Five of Wands", meaning: "Conflict, competition, disagreement.", type: "Minor Arcana - Wands" },
+            { name: "Six of Wands", meaning: "Victory, public recognition, progress.", type: "Minor Arcana - Wands" },
+            { name: "Seven of Wands", meaning: "Challenge, defense, perseverance.", type: "Minor Arcana - Wands" },
+            { name: "Eight of Wands", meaning: "Swift action, movement, air travel.", type: "Minor Arcana - Wands" },
+            { name: "Nine of Wands", meaning: "Resilience, inner strength, persistence.", type: "Minor Arcana - Wands" },
+            { name: "Ten of Wands", meaning: "Burden, responsibility, hard work.", type: "Minor Arcana - Wands" },
+            { name: "Page of Wands", meaning: "Enthusiasm, new ideas, creative opportunities.", type: "Minor Arcana - Wands" },
+            { name: "Queen of Wands", meaning: "Courage, determination, warmth, a creative visionary.", type: "Minor Arcana - Wands" },
+            { name: "King of Wands", meaning: "Natural leader, vision, entrepreneur.", type: "Minor Arcana - Wands" },
+            // Cups
+            { name: "Ace of Cups", meaning: "New feelings, emotional beginnings, compassion.", type: "Minor Arcana - Cups" },
+            { name: "Two of Cups", meaning: "United love, partnership, connection.", type: "Minor Arcana - Cups" },
+            { name: "Three of Cups", meaning: "Friendship, community, celebration.", type: "Minor Arcana - Cups" },
+            { name: "Four of Cups", meaning: "Apathy, discontent, re-evaluation.", type: "Minor Arcana - Cups" },
+            { name: "Five of Cups", meaning: "Loss, grief, regret.", type: "Minor Arcana - Cups" },
+            { name: "Six of Cups", meaning: "Nostalgia, childhood memories, innocence.", type: "Minor Arcana - Cups" },
+            { name: "Seven of Cups", meaning: "Fantasy, illusion, choices.", type: "Minor Arcana - Cups" },
+            { name: "Eight of Cups", meaning: "Disappointment, walking away, search for meaning.", type: "Minor Arcana - Cups" },
+            { name: "Nine of Cups", meaning: "Wishes fulfilled, satisfaction, comfort.", type: "Minor Arcana - Cups" },
+            { name: "Ten of Cups", meaning: "Inner peace, joy, harmonious relationships.", type: "Minor Arcana - Cups" },
+            { name: "Page of Cups", meaning: "Creative beginnings, emotional news, intuition.", type: "Minor Arcana - Cups" },
+            { name: "Queen of Cups", meaning: "Compassion, emotional security, intuition.", type: "Minor Arcana - Cups" },
+            { name: "King of Cups", meaning: "Emotional balance, compassion, control.", type: "Minor Arcana - Cups" },
+            // Swords
+            { name: "Ace of Swords", meaning: "Clear thinking, new ideas, justice.", type: "Minor Arcana - Swords" },
+            { name: "Two of Swords", meaning: "Stalemate, indecision, blocked emotions.", type: "Minor Arcana - Swords" },
+            { name: "Three of Swords", meaning: "Heartbreak, sorrow, mental anguish.", type: "Minor Arcana - Swords" },
+            { name: "Four of Swords", meaning: "Rest, contemplation, restoration.", type: "Minor Arcana - Swords" },
+            { name: "Five of Swords", meaning: "Conflict, tension, loss, defeat.", type: "Minor Arcana - Swords" },
+            { name: "Six of Swords", meaning: "Transition, change, moving on.", type: "Minor Arcana - Swords" },
+            { name: "Seven of Swords", meaning: "Deception, betrayal, cunning, strategy.", type: "Minor Arcana - Swords" },
+            { name: "Eight of Swords", meaning: "Restriction, self-imprisonment, anxiety.", type: "Minor Arcana - Swords" },
+            { name: "Nine of Swords", meaning: "Anxiety, worry, nightmares, despair.", type: "Minor Arcana - Swords" },
+            { name: "Ten of Swords", meaning: "Painful endings, rock bottom, new beginnings.", type: "Minor Arcana - Swords" },
+            { name: "Page of Swords", meaning: "Curiosity, new ideas, eagerness, gossip.", type: "Minor Arcana - Swords" },
+            { name: "Queen of Swords", meaning: "Sharp wit, honest, objective, independent.", type: "Minor Arcana - Swords" },
+            { name: "King of Swords", meaning: "Intellectual power, authority, truth.", type: "Minor Arcana - Swords" },
+            // Pentacles
+            { name: "Ace of Pentacles", meaning: "New opportunities, prosperity, a fresh start.", type: "Minor Arcana - Pentacles" },
+            { name: "Two of Pentacles", meaning: "Balance, adaptability, juggling resources.", type: "Minor Arcana - Pentacles" },
+            { name: "Three of Pentacles", meaning: "Teamwork, collaboration, learning.", type: "Minor Arcana - Pentacles" },
+            { name: "Four of Pentacles", meaning: "Control, stability, security, greed.", type: "Minor Arcana - Pentacles" },
+            { name: "Five of Pentacles", meaning: "Financial struggle, poverty, hardship, loneliness.", type: "Minor Arcana - Pentacles" },
+            { name: "Six of Pentacles", meaning: "Giving, receiving, sharing wealth, charity.", type: "Minor Arcana - Pentacles" },
+            { name: "Seven of Pentacles", meaning: "Assessment, reward, effort, harvest.", type: "Minor Arcana - Pentacles" },
+            { name: "Eight of Pentacles", meaning: "Skill, craftsmanship, hard work, mastery.", type: "Minor Arcana - Pentacles" },
+            { name: "Nine of Pentacles", meaning: "Luxury, independence, security, solitude.", type: "Minor Arcana - Pentacles" },
+            { name: "Ten of Pentacles", meaning: "Wealth, family, legacy, established home.", type: "Minor Arcana - Pentacles" },
+            { name: "Page of Pentacles", meaning: "New opportunities, inspiration, manifesting.", type: "Minor Arcana - Pentacles" },
+            { name: "Queen of Pentacles", meaning: "Practicality, nurturing, security, abundance.", type: "Minor Arcana - Pentacles" },
+            { name: "King of Pentacles", meaning: "Wealth, stability, security, discipline.", type: "Minor Arcana - Pentacles" }
+        ];
+
+        const positions = ["The Past", "The Present", "The Future"];
+        const drawButton = document.getElementById('drawButton');
+        const cardContainer = document.getElementById('cardContainer');
+        const readingContainer = document.getElementById('readingContainer');
+        const loadingContainer = document.getElementById('loadingContainer');
+
+        // Simple SVG for the card backs
+        const cardBackSVG = `
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <rect x="5" y="5" width="90" height="90" rx="10" stroke="#b2946c" stroke-width="2" fill="none" />
+                <circle cx="50" cy="50" r="25" fill="#f3e9d2" />
+                <path d="M50 25 L50 75 M25 50 L75 50" stroke="#b2946c" stroke-width="4" stroke-linecap="round" />
+            </svg>
+        `;
+
+        // Card image generation (Placeholder for a more detailed image)
+        function getCardImageSVG(cardName) {
+            const words = cardName.split(' ');
+            const initials = words.map(w => w.charAt(0)).join('');
+            return `
+                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                    <rect x="5" y="5" width="90" height="90" fill="#2d2b40" stroke="#b2946c" stroke-width="2" rx="10" />
+                    <text x="50" y="50" font-family="Cinzel, serif" font-size="20" font-weight="bold" fill="#f3e9d2" text-anchor="middle" dominant-baseline="middle">${initials}</text>
+                </svg>
+            `;
+        }
+
+        async function getReadingFromAPI(cards) {
+            const cardData = cards.map(c => `Card: ${c.name} - Meaning: ${c.meaning}`).join('\n');
+            const prompt = `Based on the following three tarot cards and their meanings, provide a short, mystical, and insightful three-sentence reading that connects their meanings together. Do not just list the meanings again. The first card represents the past, the second the present, and the third the future.
+
+            Cards:
+            ${cardData}
+            `;
+            
+            const chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = "" 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            try {
+                let response = null;
+                let result = null;
+                const maxRetries = 5;
+                const initialDelay = 1000;
+                
+                for (let i = 0; i < maxRetries; i++) {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (response.ok) {
+                        result = await response.json();
+                        break;
+                    } else if (response.status === 429) {
+                        // Exponential backoff
+                        const delay = initialDelay * Math.pow(2, i);
+                        await new Promise(res => setTimeout(res, delay));
+                    } else {
+                        throw new Error(`API call failed with status: ${response.status}`);
+                    }
+                }
+
+                if (!response.ok) {
+                    throw new Error("Maximum retries exceeded or non-recoverable error occurred.");
+                }
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    return "The threads of fate are intertwined in a way that words cannot describe. Seek deeper within yourself for the answer.";
+                }
+            } catch (error) {
+                console.error("Error fetching reading:", error);
+                return "The cosmic connection is weak, and the cards cannot be read at this moment. Please try again later.";
+            }
+        }
+
+        async function drawCards() {
+            // Disable button and show loading state
+            drawButton.disabled = true;
+            readingContainer.classList.add('hidden');
+            cardContainer.innerHTML = '';
+            readingContainer.innerHTML = '';
+            loadingContainer.style.display = 'flex';
+
+            // Randomly select 3 unique cards
+            const shuffledDeck = deck.sort(() => 0.5 - Math.random());
+            const selectedCards = shuffledDeck.slice(0, 3);
+            const isReversed = Math.random() < 0.3; // 30% chance for a reversed card
+
+            // Create and display the cards with a flip animation
+            selectedCards.forEach((card, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = `tarot-card ${isReversed && index === 1 ? 'reversed' : ''}`;
+                
+                const cardInner = document.createElement('div');
+                cardInner.className = 'card-inner';
+                
+                const cardFront = document.createElement('div');
+                cardFront.className = 'card-front';
+                cardFront.innerHTML = `
+                    <div class="card-position">${positions[index]}</div>
+                    <div class="card-image">${getCardImageSVG(card.name)}</div>
+                    <div class="card-name">${card.name}</div>
+                `;
+
+                const cardBack = document.createElement('div');
+                cardBack.className = 'card-back';
+                cardBack.innerHTML = cardBackSVG;
+
+                cardInner.appendChild(cardBack);
+                cardInner.appendChild(cardFront);
+                cardDiv.appendChild(cardInner);
+                cardContainer.appendChild(cardDiv);
+
+                // Add flip animation after a small delay
+                setTimeout(() => {
+                    cardDiv.classList.add('flipped');
+                }, 500 * index);
+            });
+
+            // Get reading from API
+            const readingText = await getReadingFromAPI(selectedCards);
+
+            // Display reading
+            loadingContainer.style.display = 'none';
+            readingContainer.classList.remove('hidden');
+            readingContainer.innerHTML = `
+                <h2>The Reading</h2>
+                <div class="reading-card-meaning">
+                    <h3>${positions[0]}: ${selectedCards[0].name}</h3>
+                    <p>${selectedCards[0].meaning}</p>
+                </div>
+                <div class="reading-card-meaning">
+                    <h3>${positions[1]}: ${selectedCards[1].name}</h3>
+                    <p>${selectedCards[1].meaning}</p>
+                </div>
+                <div class="reading-card-meaning">
+                    <h3>${positions[2]}: ${selectedCards[2].name}</h3>
+                    <p>${selectedCards[2].meaning}</p>
+                </div>
+                <h3>In Conjunction:</h3>
+                <p>${readingText}</p>
+            `;
+
+            drawButton.disabled = false;
+        }
+
+        drawButton.addEventListener('click', drawCards);
+    </script>
+</body>
+</html>
